@@ -1,0 +1,7 @@
+#ignore . as file start
+.*
+!.git
+!.gitignore
+#ignore Log file
+/Log/*
+Temp/*

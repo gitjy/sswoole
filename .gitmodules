@@ -1,0 +1,3 @@
+[submodule "vendor/easyswoole/easyswoole"]
+	path = vendor/easyswoole/easyswoole
+	url = git@github.com:easy-swoole/easyswoole.git
