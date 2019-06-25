@@ -17,6 +17,10 @@ use EasySwoole\Http\Response;
 use EasySwoole\Utility\File;
 use App\Process\HotReload;
 
+use EasySwoole\EasySwoole\Crontab\Crontab;
+use App\Crontab\TaskOne;
+use App\Crontab\TaskTwo;
+
 
 class EasySwooleEvent implements Event
 {
@@ -35,12 +39,21 @@ class EasySwooleEvent implements Event
     public static function mainServerCreate(EventRegister $register)
     {
         // TODO: Implement mainServerCreate() method.
+        //自定义进程
         $swooleServer = ServerManager::getInstance()->getSwooleServer();
         $swooleServer->addProcess((new HotReload('HotReload', ['disableInotify' => false]))->getProcess());
         //为主服务配置onWorkStart事件
         $register->add($register::onWorkerStart,function (\swoole_server $server,int $workerId){
             echo $workerId .' start' . "\n";
         });
+        //自定义定时任务
+        /**
+         * **************** Crontab任务计划 **********************
+         */
+        // 开始一个定时任务计划
+        Crontab::getInstance()->addTask(TaskOne::class);
+        // 开始一个定时任务计划
+        Crontab::getInstance()->addTask(TaskTwo::class);
     }
 
     public static function onRequest(Request $request, Response $response): bool

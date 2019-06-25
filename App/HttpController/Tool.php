@@ -51,7 +51,6 @@ class Tool extends Ctrl
             function () {echo "异步开启任务执行完毕...\n";}
             );*/
 
-
         //5秒后关闭异步任务
         $timerIdOrName = $timerName;
         //闭包投递 无法用异步任务中关闭定时任务
