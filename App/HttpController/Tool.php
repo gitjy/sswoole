@@ -36,7 +36,7 @@ class Tool extends Ctrl
         Timer::getInstance()->after(1000, function () {
             echo "this timer run after 1 seconds\n";
         });
-        //闭包投递 无法用异步任务开启的定时任务，无法关闭
+        //闭包投递 异步任务开启的定时任务，无法关闭
         /*TaskManager::async(function () use ($timerName) {
             $timerId = Timer::getInstance()->loop(1000, function () use ($timerName) {
                 $loop = Config::getInstance()->getConf($timerName);
@@ -71,9 +71,12 @@ class Tool extends Ctrl
 
     }
 
+    /**
+     * console log日志
+     */
     function consoleLog()
     {
-        Logger::getInstance()->console("time 3", false);
+        Logger::getInstance()->console("time 3");
     }
 
     function getDi()
@@ -81,5 +84,10 @@ class Tool extends Ctrl
         $logger = Di::getInstance()->get(SysConst::LOGGER_HANDLER);
         var_dump($logger);
 
+    }
+
+    function getHeaders()
+    {
+	var_dump($this->request()->getHeaders());	
     }
 }

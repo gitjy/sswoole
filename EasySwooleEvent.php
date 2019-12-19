@@ -32,8 +32,7 @@ class EasySwooleEvent implements Event
         ini_set('display_errors', isset($_GET['_debug'])); // 线上环境关闭错误
         mb_internal_encoding("UTF-8");
         date_default_timezone_set('PRC');
-        self::loadConf(EASYSWOOLE_ROOT.'/App/Config');
-
+        //self::loadConf(EASYSWOOLE_ROOT.'/App/Config'); //限制1024size
     }
 
     public static function mainServerCreate(EventRegister $register)
@@ -42,6 +41,7 @@ class EasySwooleEvent implements Event
         //自定义进程
         $swooleServer = ServerManager::getInstance()->getSwooleServer();
         $swooleServer->addProcess((new HotReload('HotReload', ['disableInotify' => false]))->getProcess());
+
         //为主服务配置onWorkStart事件
         $register->add($register::onWorkerStart,function (\swoole_server $server,int $workerId){
             echo $workerId .' start' . "\n";

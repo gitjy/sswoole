@@ -16,10 +16,12 @@ class Index extends Controller
     //输出数据
     function  index()
     {
-        echo "922";
-        $this->response()->write('Hello world! -.-');
-        $this->response()->write('next ! -.-');
+        echo $str = "中国啊，我亲爱的中国";
+//        $this->response()->write('Hello world! -.-');
+//        $this->response()->write('next ! -.-');
+        $this->response()->write($str);
         //$this->response()->write(['name' => 'lisi']);
+        $this->response()->withHeader('Content-type','application/json;charset=utf-8');
     }
 
     //打印数据 在终端显示
@@ -39,7 +41,9 @@ class Index extends Controller
         $this->response()->write($rt);
     }
 
-    //打印数据 在终端显示
+    /*打印数据 在终端显示
+    * 常量
+    */
     function  const()
     {
         $this->response()->write(EASYSWOOLE_ROOT);
@@ -57,8 +61,8 @@ class Index extends Controller
 
     function getConfig()
     {
-        $conf = Config::getInstance()->getConf('level.presenter_division');
-        $this->response()->write(json_encode($conf, 256));
+        $conf = Config::getInstance()->getConf();
+        $this->response()->write(json_encode($conf, 384));
         $this->response()->withHeader('Content-type','application/json;charset=utf-8');
     }
 
@@ -83,8 +87,10 @@ class Index extends Controller
         //闭包投递
         TaskManager::async(function () {echo "执行异步任务...\n";return true;},
             function () {echo "异步任务执行完毕...\n";});
+        //对象投递
         $task = new Task('data');
         TaskManager::async($task);
+        //类投递
         TaskManager::async(QuickTask::class);
         //任务并发
         $tasks = [
