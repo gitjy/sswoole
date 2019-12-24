@@ -19,21 +19,9 @@ return [
             'task_worker_num' => 8,
             'reload_async' => true,
             'task_enable_coroutine' => true,
-            'max_wait_time'=>5
+            'max_wait_time'=>3
         ],
     ],
     'TEMP_DIR' => null,
-    'LOG_DIR' => null,
-    'CONSOLE' => [
-        'ENABLE' => true,
-        'LISTEN_ADDRESS' => '127.0.0.1',
-        'HOST' => '127.0.0.1',
-        'PORT' => 9600,
-        'USER' => 'root',
-        'PASSWORD' =>'123456'
-    ],
-    'DISPLAY_ERROR' => true,
-    'PHAR' => [
-        'EXCLUDE' => ['.idea', 'Log', 'Temp', 'easyswoole', 'easyswoole.install']
-    ]
+    'LOG_DIR' => null
 ];
